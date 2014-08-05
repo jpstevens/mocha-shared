@@ -1,6 +1,6 @@
 {
   "name": "mocha-shared",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Shared behaviour for Mocha, to help DRY your test suite",
   "main": "dist/mocha-shared.js",
   "scripts": {

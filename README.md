@@ -5,7 +5,7 @@ Shared behaviour for Mocha, to help DRY your test suite.
 
 ## Installation
 
-In the root project of your directory, run the command:
+In the root directory of your project, run the command:
 ```
 npm install mocha-shared --save-dev
 ```
