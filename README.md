@@ -78,7 +78,7 @@ describe('User', function() {
       expect(this.user.age).to.equal(this.age);
     });
   });
-  
+
   // name doesn't change, so set it here
   beforeEach(function(){
     this.name = 'Christopher Mintz-Plasse';
@@ -101,20 +101,20 @@ describe('User', function() {
 
 
   describe('when the user is over 21', function(){
- 
+
     beforeEach(function(){
       this.age = 25;
       this.fakeId = true;
     });
-    
+
     // shared example
     shared.example('has a name and age');
-    
+
     it('does not have a fake ID', function(){
       expect(this.user.hasFakeID()).to.be.falsey;
     });
   });
 
 });
-shared.example
+
 ```
