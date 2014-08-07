@@ -24,7 +24,7 @@ var shared = require('mocha-shared');
 | hasBehavior   | `shared.hasBehavior(description, fn)` | `shared.hasBehavior(description[, opts])`   |
 | behavesLike   | `shared.behavesLike(description, fn)` | `shared.behavesLike(description[, opts])`   |
 | setup         | `shared.setup(description, fn)`       | `shared.setup(description)`                 |
-| forMany       | N/A                                   | `shared.forMany(values, fn\|description)`   |
+| forMany       | N/A                                   | `shared.forMany(values, [fn][description])` |
 
 ### behavior
 
