@@ -1,30 +1,103 @@
-shared = require("../src/mocha-shared")
+shared = require('../src/mocha-shared')
 
-describe '#example', ->
+describe '#hasBehavior', ->
 
-  shared.example 'a shared (it block)', ->
+  describe 'with no params', ->
 
-    it 'inherits the parent shared', ->
-      expect(@actual).to.equal @expected
+    shared.behavior 'contains the letter "a"', ->
 
-  before ->
-    @actual = 'apple'
-    @expected = 'apple'
+      before ->
+        @letter = 'a'
 
-  shared.example 'a shared (it block)'
+      it "contains the letter 'a'", ->
+        expect(@word).to.contain @letter
 
-  describe 'nested shared example', ->
+    describe 'for car', ->
 
-    before ->
-      @actual = 'lovely'
-      @expected = 'lovely'
+      before ->
+        @word = 'car'
 
-    shared.example 'a shared (it block)'
+      shared.hasBehavior 'contains the letter "a"'
 
-  describe 'another example', ->
+    describe 'for banana', ->
 
-    before ->
-      @actual = 'something'
-      @expected = 'something'
+      before ->
+        @word = 'banana'
 
-    shared.example 'a shared (it block)'
+      shared.hasBehavior 'contains the letter "a"'
+
+  describe 'when param is a string', ->
+
+    shared.behavior 'contains the letter', (letter) ->
+
+      it "contains the letter '#{letter}'", ->
+        expect(@word).to.contain letter
+
+    describe 'for banana', ->
+
+      before ->
+        @word = 'banana'
+
+      shared.hasBehavior 'contains the letter', 'b'
+
+    describe 'for car', ->
+
+      before ->
+        @word = 'car'
+
+      shared.hasBehavior 'contains the letter', 'c'
+
+  describe 'when param is an object', ->
+
+    shared.behavior 'does not contain the letter', (opts) ->
+
+      it "does not contain the letter '#{opts.letter}'", ->
+        expect(@word).to.not.contain opts.letter
+
+    describe 'for banana', ->
+
+      before ->
+        @word = 'banana'
+
+      shared.hasBehavior 'does not contain the letter', { letter: 'd' }
+
+    describe 'for car', ->
+
+      before ->
+        @word = 'car'
+
+      shared.hasBehavior 'does not contain the letter', { letter: 'e' }
+
+describe '#setup', ->
+
+  shared.setup 'checking letters in donkey', ->
+
+    beforeEach ->
+
+      @word = 'donkey'
+      @includesLetter = (letter) ->
+        if @word.match(letter) then true else false
+
+  describe 'the word donkey', ->
+
+    shared.setup 'checking letters in donkey'
+
+    it 'includes the letter "e"', ->
+      expect(@includesLetter("e")).to.be.true
+
+    it 'does not include the letter "f"', ->
+      expect(@includesLetter("f")).to.be.false
+
+describe '#forMany', ->
+
+  shared.behavior 'is a number', (number) ->
+
+    it "#{number} is a number", ->
+      expect(typeof number).to.equal 'number'
+
+  shared.forMany [1,2,3], (number) ->
+
+    shared.hasBehavior 'is a number', number
+
+  shared.forMany [5,6,7], 'is a number'
+
