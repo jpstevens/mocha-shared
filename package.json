@@ -1,10 +1,11 @@
 {
   "name": "mocha-shared",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Shared behaviour for Mocha, to help DRY your test suite",
   "main": "dist/mocha-shared.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "prepublish": "grunt"
   },
   "repository": {
     "type": "git",
