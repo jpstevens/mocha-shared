@@ -68,36 +68,52 @@ describe '#hasBehavior', ->
 
       shared.hasBehavior 'does not contain the letter', { letter: 'e' }
 
-describe '#setup', ->
+  describe '#setup', ->
 
-  shared.setup 'checking letters in donkey', ->
+    shared.setup 'checking letters in donkey', ->
 
-    beforeEach ->
+      beforeEach ->
 
-      @word = 'donkey'
-      @includesLetter = (letter) ->
-        if @word.match(letter) then true else false
+        @word = 'donkey'
+        @includesLetter = (letter) ->
+          if @word.match(letter) then true else false
 
-  describe 'the word donkey', ->
+    describe 'the word donkey', ->
 
-    shared.setup 'checking letters in donkey'
+      shared.setup 'checking letters in donkey'
 
-    it 'includes the letter "e"', ->
-      expect(@includesLetter("e")).to.be.true
+      it 'includes the letter "e"', ->
+        expect(@includesLetter("e")).to.be.true
 
-    it 'does not include the letter "f"', ->
-      expect(@includesLetter("f")).to.be.false
+      it 'does not include the letter "f"', ->
+        expect(@includesLetter("f")).to.be.false
 
-describe '#forMany', ->
+  describe '#scenario', ->
 
-  shared.behavior 'is a number', (number) ->
+    shared.scenario 'feelings test', (person) ->
 
-    it "#{number} is a number", ->
-      expect(typeof number).to.equal 'number'
+      describe "#{person.name}", ->
 
-  shared.forMany [1,2,3], (number) ->
+        it 'is not feeling sad', ->
+          expect(person.feelings).to.not.contain 'sad'
 
-    shared.hasBehavior 'is a number', number
+        it 'is feeling happy', ->
+          expect(person.feelings).to.contain 'happy'
 
-  shared.forMany [5,6,7], 'is a number'
+    shared.scenario 'feelings test', { name: "Steve", feelings: ['happy', 'joyous'] }
+
+  describe '#forMany', ->
+
+    shared.forMany [
+      { name: "Steve", feelings: ['happy', 'joyous'] }
+      { name: "Peter", feelings: ['happy'] }
+    ], 'feelings test'
+
+  describe '#for', ->
+
+    shared.for [
+      { name: "Steve", feelings: ['happy', 'joyous'] }
+      { name: "Peter", feelings: ['happy'] }
+    ], 'feelings test'
+
 
