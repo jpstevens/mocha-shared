@@ -109,11 +109,20 @@ describe '#hasBehavior', ->
       { name: "Peter", feelings: ['happy'] }
     ], 'feelings test'
 
+    describe 'when a behavior is called on a forMany block', ->
+
+      it 'throws an error', ->
+        expect(-> shared.forMany ['a'], 'contains the letter').to.throw Error, /requires a scenario. Got behavior/
+
+    describe 'when a setup is called on a forMany block', ->
+
+      it 'throws an error', ->
+        expect(-> shared.forMany ['a'], 'checking letters in donkey').to.throw Error, /requires a scenario. Got setup/
+
   describe '#for', ->
 
     shared.for [
       { name: "Steve", feelings: ['happy', 'joyous'] }
       { name: "Peter", feelings: ['happy'] }
     ], 'feelings test'
-
 

@@ -34,9 +34,9 @@ class Shared
       try
         checkForMany('scenario')(fn, values)
       catch err
-        if behavior[fn] isnt undefined
+        if data.behavior[fn] isnt undefined
           throw new Error("The sugar-syntax for 'forMany' requires a scenario. Got behavior: '#{fn}'")
-        else if setup[fn] isnt undefined
+        else if data.setup[fn] isnt undefined
           throw new Error("The sugar-syntax for 'forMany' requires a scenario. Got setup: '#{fn}'")
         else
           throw err
