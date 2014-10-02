@@ -1,5 +1,6 @@
 # mocha-shared
 [![Build Status](https://travis-ci.org/jpstevens/mocha-shared.svg?branch=master)](https://travis-ci.org/jpstevens/mocha-shared)
+![Downloads/month](http://img.shields.io/npm/dm/mocha-shared.svg)
 
 Shared behaviour for Mocha, to help DRY your test suite.
 
