@@ -4,41 +4,29 @@
 
     grunt.initConfig({
       watch: {
-        files: ['src/**/*.*', '*.*', 'tests/**/*.*'],
+        files: ['lib/**/*.*', '*.*', 'test/**/*.*'],
         tasks: ['test']
       },
-      coffee: {
-        glob_to_multiple: {
-          expand: true,
-          flatten: false,
-          cwd: 'src/',
-          src: ['**/*.coffee'],
-          dest: 'dist/',
-          ext: '.js'
-        }
-      },
-      coffeelint: {
-        files: ['src/**/*.coffee']
+      jshint: {
+        files: ['lib/**/*.*', 'test/**/*.*'],
       },
       mochaTest: {
         test: {
           options: {
             reporter: 'spec',
             require: [
-              'coffee-script/register',
               function(){ expect = require('chai').expect; }
             ]
           },
-          src: ['tests/**/*.coffee']
+          src: ['test/**/*-spec.js']
         }
       }
     });
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('build', ['coffee']);
-    grunt.registerTask('test', ['mochaTest']);
-    grunt.registerTask('default', ['test', 'build']);
+    grunt.registerTask('test', ['jshint', 'mochaTest']);
+    grunt.registerTask('default', ['test']);
 
   };
 })();
